@@ -1,9 +1,7 @@
 from rest_framework import serializers
 from .models import Prestamo, Libro, Autor
 
-
-
-""" class PrestamoSerializer(serializers.Serializer):
+class PrestamoSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     idlibro=serializers.IntegerField()
     idusuario=serializers.IntegerField()
@@ -20,15 +18,22 @@ from .models import Prestamo, Libro, Autor
         instance.fecdevolucion = validated_data.get('fechadevolucion', instance.fecdevolucion)
         instance.save()
         return instance
- """
+
 class AutorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Autor
         fields = ('nombre','nacionalidad')
+
 class LibroSerializer(serializers.ModelSerializer):
     class Meta:
         model = Libro
         fields = ('codigo', 'titulo', 'isbn', 'numpage', 'autor')
+
+class LibroSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Libro
+        fields = ('codigo', 'titulo', 'isbn', 'numpage', 'autor')
+        
 class PrestamoSerializer(serializers.ModelSerializer):
     libro=LibroSerializer(many=False, read_only=True)
     class Meta:
